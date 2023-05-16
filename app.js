@@ -8,19 +8,18 @@ const server = http.createServer((req, res)=>{
     
     
     if(url==='/'){
-        res.write('<html>');
-        res.write('<head><title>Enter message</title></head>');
-        res.write('<body>')
         fs.readFile('message.txt', (err, data)=>{
             const msg=Buffer.from(data).toString();
             console.log(msg);
-            res.write(msg);
-        })
-        
-        // res.write(mess);
-        res.write('<form action="/message" method="POST"><input tupe="text" name="message"><button type="submit">Send</button></form></body>');
+            
+            res.write('<html>');
+        res.write('<head><title>Enter message</title></head>');
+        res.write(`<body>${msg}</body>`);
+        res.write('<body><form action="/message" method="POST"><input tupe="text" name="message"><button type="submit">Send</button></form></body>');
         res.write('</html>');
         return res.end();
+        })
+        
     }
     if(url==='/message' && method==='POST'){
         const body=[];
