@@ -1,37 +1,24 @@
 const http = require('http');
+const fs=require('fs'); 
 
 const server = http.createServer((req, res)=>{
     // console.log('Aishwarya');
     const url=req.url;
-    if(url==='/home'){
-        res.write('<html>');
-        res.write('<head><title>Welcome</title></head>');
-        res.write('<body><h1>Welcome Home<h1></body>');
-        res.write('</html>');
-        res.end();
-    }
-    if(url==='/about'){
-        res.write('<html>');
-        res.write('<head><title>Welcome</title></head>');
-        res.write('<body><h1>Welcome to About us page<h1></body>');
-        res.write('</html>');
-        res.end();
-    }
-    if(url==='/node'){
-        res.write('<html>');
-        res.write('<head><title>Welcome</title></head>');
-        res.write('<body><h1>Welcome to my Node js Project<h1></body>');
-        res.write('</html>');
-        res.end();
-    }
+    const method=req.method;
+      
     if(url==='/'){
         res.write('<html>');
-    res.write('<head><title>Welcome</title></head>');
-    res.write('<body><h1>Hello to Node JS<h1></body>');
-    res.write('</html>');
-    res.end();
+        res.write('<head><title>Enter message</title></head>');
+        res.write('<body><form action="/message" method="POST"><input tupe="text" name="message"><button type="submit">Send</button></form></body>');
+        res.write('</html>');
+        return res.end();
     }
-    
+    if(url==='/message' && method==='POST'){
+        fs.writeFileSync('message.txt', 'Dummy');
+        res.statusCode=302;
+        res.setHeader('Location', '/');
+        return res.end();
+    }
 });
 
 server.listen(4000);
