@@ -28,8 +28,7 @@ if(url==='/message' && method==='POST'){
             res.setHeader('Location', '/');
             return res.end();
         });
-    })
-    
+    })   
 }
 }
 // module.exports = requestHandler;
