@@ -3,7 +3,6 @@ const fs=require('fs');
 const requestHandler = (req, res)=>{
     const url=req.url;
     const method=req.method;
-
 if(url==='/'){
     fs.readFile('message.txt', (err, data)=>{
         const msg=Buffer.from(data).toString();
